@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import bodyParser from 'body-parser'
 import { getAllUsers } from './controllers/userController.js';
 import router from "./routes/userRoutes.js";
-const PORT = 8001 || process.env.PORT;
+const PORT = process.env.PORT || 8001;
 
 const app = new express();
 
