@@ -1,13 +1,16 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from 'body-parser'
-import { getAllUsers } from './controllers/userController.js';
 import router from "./routes/userRoutes.js";
+import dotenv from "dotenv";
 const PORT = 8001 || process.env.PORT;
+dotenv.config({
+    path: "./config.env"
+})
 
 const app = new express();
-
-mongoose.connect("mongodb://127.0.0.1:27017/Users", {
+const DB = process.env.DB_CLUSTER.replace("<password>", process.env.DB_PASS);
+mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: true,
@@ -16,7 +19,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/Users", {
 
 app.use(bodyParser.json());
 app.use(express.json())
-app.use("/api/v1/",router)
+app.use("/api/v1/", router)
 // app.get("users", getAllUsers)
 
 app.listen(PORT, () => console.log(`Server is ON http://localhost:${PORT}`))
