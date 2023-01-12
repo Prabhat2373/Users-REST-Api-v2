@@ -25,6 +25,8 @@ export const CreateUser = async (req, res, next) => {
             role: req.body.role,
             lastLogin: req.body.lastLogin
         });
+        console.log(req.body);
+
         res.status(201).json({
             status: "SUCCESS",
             message: "User Created Successfully",
