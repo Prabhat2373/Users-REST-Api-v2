@@ -43,9 +43,9 @@ export const DownloadCSV = async (req, res, next) => {
     try {
         var filename = "users.csv";
         var dataArray;
-        User.find().select("-__v").lean().exec({}, function (err, users) {
+       await User.find().select("-__v").lean().exec({}, function (err, users) {
             if (err) res.send(err);
-
+        console.log(err, users)
             res.statusCode = 200;
             res.setHeader('Content-Type', 'text/csv');
             res.setHeader("Content-Disposition", 'attachment; filename=' + filename);
